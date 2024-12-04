@@ -1,6 +1,6 @@
 <h4 class="appNameUpper text-center">SPLI</h4>
 <h4 class="appNameLower text-center">TTER</h4>
-<div class="container main border border-0 border-white rounded-4 bg-white">
+<div class="container main border border-0 border-white rounded-4 bg-white" data-controller="calculation">
   <div class="row p-4" id="mainrow">
     <div class="col-12 col-md-6 p-4 rounded-3">
       <div class="row" id="left-col-rows">
@@ -12,105 +12,92 @@
           <input
             type="number"
             placeholder="0"
-            aria-describedby="basic-addon1"
             class="form-control text-end"
-            style="border: none"
             id="bill-input-value"
+            data-calculation-target="bill"
+            data-action="input->calculation#updateCalculations"
           />
         </div>
       </div>
 
       <div class="row" id="left-col-rows">
-        <label for="bill" class="form-label">Select Tip %</label>
+        <label for="tip" class="form-label">Select Tip %</label>
         <div class="row">
           <div class="col-md-4 col-6">
-            <button id="percent5" class="btn" type="button">5%</button>
+            <button class="btn" type="button" data-action="click->calculation#updateCalculations" data-calculation-target="tip">5%</button>
           </div>
           <div class="col-md-4 col-6">
-            <button id="percent10" class="btn" type="button">10%</button>
+            <button class="btn" type="button" data-action="click->calculation#updateCalculations" data-calculation-target="tip">10%</button>
           </div>
           <div class="col-md-4 col-6">
-            <button id="percent15" class="btn" type="button">15%</button>
+            <button class="btn" type="button" data-action="click->calculation#updateCalculations" data-calculation-target="tip">15%</button>
           </div>
           <div class="col-md-4 col-6">
-            <button id="percent25" class="btn" type="button">25%</button>
+            <button class="btn" type="button" data-action="click->calculation#updateCalculations" data-calculation-target="tip">25%</button>
           </div>
           <div class="col-md-4 col-6">
-            <button id="percent50" class="btn" type="button">50%</button>
+            <button class="btn" type="button" data-action="click->calculation#updateCalculations" data-calculation-target="tip">50%</button>
           </div>
           <div class="col-md-4 col-6">
             <input
-              id="percentCustom"
               class="customTip"
               type="number"
               placeholder="Custom"
+              data-calculation-target="tip"
+              data-action="input->calculation#updateCalculations"
             />
           </div>
         </div>
       </div>
 
       <div class="row" id="left-col-rows">
-        <label for="number-of-people" class="form-label" id="cantbezeroText"
-          >Number of People</label
-        >
-        <div id="cantBeZero" class="input-group">
+        <label for="number-of-people" class="form-label">Number of People</label>
+        <div class="input-group">
           <span class="input-group-text" style="border: none">
             <img src="/images/icon-person.svg" alt="" />
           </span>
           <input
             type="number"
             placeholder="0"
-            aria-describedby="basic-addon1"
             class="form-control text-end"
-            style="border: none"
             id="numberOfPeopleInputValue"
+            data-calculation-target="people"
+            data-action="input->calculation#updateCalculations"
           />
         </div>
       </div>
     </div>
 
-    <div
-      class="d-flex flex-column col-12 col-md-6 p-5 rounded-4"
-      style="background: var(--VeryDarkCyan-color)"
-    >
+    <div class="d-flex flex-column col-12 col-md-6 p-5 rounded-4" style="background: var(--VeryDarkCyan-color)">
       <div class="row mb-5">
         <div class="col">
-          <label for="tip-amount" class="form-label" id="upperLabel"
-            >Tip Amount</label
-          >
+          <label for="tip-amount" class="form-label">Tip Amount</label>
           <br />
-          <label for="tip-amount" class="form-label" id="lowerLabel"
-            >/ person</label
-          >
+          <label for="tip-amount" class="form-label">/ person</label>
         </div>
         <div class="col text-end mt-1 me-3">
-          <span id="right-col-display-result ">
-            <p id="tipAmountResultValue">$0.00</p>
+          <span id="right-col-display-result">
+            <p id="tipAmountResultValue" data-calculation-target="tipAmount">$0.00</p>
           </span>
         </div>
       </div>
 
       <div class="row mb-5">
         <div class="col">
-          <label for="total" class="form-label" id="upperLabel"
-            >Total</label
-          >
+          <label for="total" class="form-label">Total</label>
           <br />
-          <label for="total" class="form-label" id="lowerLabel"
-            >/ person</label
-          >
+          <label for="total" class="form-label">/ person</label>
         </div>
         <div class="col text-end mt-1 me-3">
-          <span id="right-col-display-result ">
-            <p id="totalResultValue">$0.00</p>
+          <span id="right-col-display-result">
+            <p id="totalResultValue" data-calculation-target="totalAmount">$0.00</p>
           </span>
         </div>
       </div>
+
       <div class="row align-items-end mt-auto">
         <div class="col-md-12 col-12">
-          <button id="reset-button" class="btn btn-reset p-2" type="button">
-            RESET
-          </button>
+          <button id="reset-button" class="btn btn-reset p-2" type="button" data-action="click->calculation#resetForm">RESET</button>
         </div>
       </div>
     </div>
