@@ -7,74 +7,59 @@ export default class extends Controller {
     console.log("connected");
   }
 
-  // updateCalculations() {
-  //   clearTimeout(this.delayTimeout); // Clear any previous timeouts to prevent multiple executions
-  
-  //   // Set a delay of 500ms (adjust as needed)
-  //   this.delayTimeout = setTimeout(() => {
-  //     const billAmount = parseFloat(this.billTarget?.value) || 0;
-  //     let tipPercentage = parseFloat(this.tipTarget?.value) || 0; 
-  //     const numberOfPeople = parseInt(this.peopleTarget?.value) || 1;
-  
-  //     const customTip = parseFloat(this.tipTarget?.value) || parseFloat(this.customTipTarget?.value);
-  //     if (!isNaN(customTip)) {
-  //       tipPercentage = customTip;
-  //     }
-  
-  //     if (numberOfPeople <= 0) {
-  //       alert("Number of people cannot be zero or less");
-  //       return;
-  //     }
-
-  //     console.log("tip percentage.............", tipPercentage)
-  //     console.log("tip target value .............", this.tipTarget)
-  
-  //     const tipAmount = (billAmount * tipPercentage) / 100;
-  //     const totalAmount = billAmount + tipAmount;
-  //     const perPersonAmount = totalAmount / numberOfPeople;
-  
-  //     this.tipAmountTarget.innerHTML = `$${tipAmount.toFixed(2)}`;
-  //     this.totalAmountTarget.innerHTML = `$${perPersonAmount.toFixed(2)}`;
-  //     this.saveCalculation(billAmount, tipPercentage, numberOfPeople, tipAmount, perPersonAmount);
-  //   }, 1000); // Adjust delay time in milliseconds
-  // }  
-
-
-  updateCalculations(event) {
-    clearTimeout(this.delayTimeout); // Clear any previous timeouts to prevent multiple executions
-    
-    // Manually set the tipTarget value based on the clicked button's text
-    const buttonValue = event.target.innerText.trim();  // Get the button text (e.g., "5%", "10%", etc.)
-    const tipPercentage = parseInt(buttonValue.replace('%', '')); // Extract the percentage value (e.g., 5 from "5%")
-    
-    // Set the value of the `tip` target to the calculated percentage
-    this.tipTarget.value = tipPercentage;
-
-    this.delayTimeout = setTimeout(() => {
-      const billAmount = parseFloat(this.billTarget?.value) || 0;
-      let finalTipPercentage = parseFloat(this.tipTarget?.value) || 0;
-
-      const numberOfPeople = parseInt(this.peopleTarget?.value) || 1;
-
-      if (numberOfPeople <= 0) {
-        alert("Number of people cannot be zero or less");
-        return;
-      }
-
-      console.log("tip percentage.............", finalTipPercentage);
-      console.log("tip target value .............", this.tipTarget?.value);
-
-      const tipAmount = (billAmount * finalTipPercentage) / 100;
-      const totalAmount = billAmount + tipAmount;
-      const perPersonAmount = totalAmount / numberOfPeople;
-
-      this.tipAmountTarget.innerHTML = `$${tipAmount.toFixed(2)}`;
-      this.totalAmountTarget.innerHTML = `$${perPersonAmount.toFixed(2)}`;
-      this.saveCalculation(billAmount, finalTipPercentage, numberOfPeople, tipAmount, perPersonAmount);
-    }, 1000); // Adjust delay time in milliseconds
+  handleFieldInput(event) {
+    if (event && event.target) {
+      const field = event.target;
+      this.updateCalculations(field);
+    }
   }
 
-  saveCalculation(billAmount, tipPercentage, numberOfPeople, tipAmount, perPersonAmount) {
+  updateCalculations(field) {
+    let tipPercentage = 0;
+    this.selectTip(field)
+    let tipTargetElement = document.getElementsByClassName('btn-selected')[0];
+    let tipTarget = tipTargetElement ? parseFloat(tipTargetElement.value) : 0;
+    // let tipTarget = document.getElementsByClassName('btn-selected')[0].value || 0;
+
+    // debugger
+    let billAmount = parseFloat(this.billTarget?.value) || 0;
+    let numberOfPeople = parseInt(this.peopleTarget?.value) || 0;
+
+    if (field.id === "bill-input-value") {
+      billAmount = parseFloat(field.value) || 0;
+    } else if (field.classList.contains("customTip")) {
+      tipPercentage = parseFloat(field.value) || 0;
+    } else if (field.id === "numberOfPeopleInputValue") {
+      numberOfPeople = parseInt(field.value) || 0;
+    }
+
+    this.clearErrorMessages();
+
+    this.saveCalculation(billAmount, tipTarget, numberOfPeople);
+  }
+
+  selectTip(field) {
+    if (field.classList.contains('tip-button')) {
+      document.querySelectorAll('.tip-button').forEach(tipButton => tipButton.classList.remove('btn-selected'));
+      field.classList.add('btn-selected');
+    }
+  }
+
+  clearErrorMessages() {
+    const errorElements = document.querySelectorAll('.text-danger');
+    errorElements.forEach(element => {
+      element.innerText = '';
+    });
+  }
+
+  displayError(message) {
+    const errorElement = document.getElementById('error');
+    if (errorElement) {
+      errorElement.innerText = message;
+    }
+  }
+
+  saveCalculation(billAmount, tipTarget, numberOfPeople) {
     fetch("/calculations", {
       method: "POST",
       headers: {
@@ -84,20 +69,20 @@ export default class extends Controller {
       body: JSON.stringify({
         calculation: {
           bill_amount: billAmount,
-          tip_percentage: tipPercentage,
-          number_of_people: numberOfPeople,
-          tip_amount: tipAmount,
-          total_amount: perPersonAmount * numberOfPeople, 
-          per_person_amount: perPersonAmount
+          tip_percentage: tipTarget,
+          number_of_people: numberOfPeople
         }
       })
     })
-    .then(response => response.json())
+
+    .then( response => response.json())
     .then(data => {
       if (data.errors) {
-        console.error("Errors:", data.errors);
+        this.displayError(data.errors.join(', '));
       } else {
-        
+        this.tipAmountTarget.innerHTML = `$${data['calculation'].tip_amount}`
+        this.totalAmountTarget.innerHTML = `$${data['calculation'].per_person_amount}`
+
       }
     });
   }
@@ -106,7 +91,7 @@ export default class extends Controller {
     this.billTarget.value = '';
     this.tipTarget.value = '';
     this.peopleTarget.value = '';
-    this.customTipTarget.value = '';
+    document.querySelectorAll('.tip-button').forEach(tipButton => tipButton.classList.remove('btn-selected'));
     this.tipAmountTarget.innerHTML = '$0.00';
     this.totalAmountTarget.innerHTML = '$0.00';
   }

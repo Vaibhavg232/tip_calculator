@@ -1,7 +1,7 @@
 <h4 class="appNameUpper text-center">SPLI</h4>
 <h4 class="appNameLower text-center">TTER</h4>
 <div class="container main border border-0 border-white rounded-4 bg-white" data-controller="calculation">
-  <div class="row p-4" id="mainrow">
+  <div class="row p-4" id="mainrow" >
     <div class="col-12 col-md-6 p-4 rounded-3">
       <div class="row" id="left-col-rows">
         <label for="bill" class="form-label">Bill</label>
@@ -15,28 +15,28 @@
             class="form-control text-end"
             id="bill-input-value"
             data-calculation-target="bill"
-            data-action="input->calculation#updateCalculations"
+            data-action="input->calculation#handleFieldInput"
           />
         </div>
       </div>
-
+      
       <div class="row" id="left-col-rows">
         <label for="tip" class="form-label">Select Tip %</label>
         <div class="row">
           <div class="col-md-4 col-6">
-            <button class="btn" type="button" data-action="click->calculation#updateCalculations" data-calculation-target="tip">5%</button>
+            <button class="btn tip-button" type="button" data-action="click->calculation#handleFieldInput" data-calculation-target="tip" value="5">5%</button>
           </div>
           <div class="col-md-4 col-6">
-            <button class="btn" type="button" data-action="click->calculation#updateCalculations" data-calculation-target="tip">10%</button>
+            <button class="btn tip-button" type="button" data-action="click->calculation#handleFieldInput" data-calculation-target="tip" value="10">10%</button>
           </div>
           <div class="col-md-4 col-6">
-            <button class="btn" type="button" data-action="click->calculation#updateCalculations" data-calculation-target="tip">15%</button>
+            <button class="btn tip-button" type="button" data-action="click->calculation#handleFieldInput" data-calculation-target="tip" value="15">15%</button>
           </div>
           <div class="col-md-4 col-6">
-            <button class="btn" type="button" data-action="click->calculation#updateCalculations" data-calculation-target="tip">25%</button>
+            <button class="btn tip-button" type="button" data-action="click->calculation#handleFieldInput" data-calculation-target="tip" value="25">25%</button>
           </div>
           <div class="col-md-4 col-6">
-            <button class="btn" type="button" data-action="click->calculation#updateCalculations" data-calculation-target="tip">50%</button>
+            <button class="btn tip-button" type="button" data-action="click->calculation#handleFieldInput" data-calculation-target="tip" value="50">50%</button>
           </div>
           <div class="col-md-4 col-6">
             <input
@@ -44,12 +44,12 @@
               type="number"
               placeholder="Custom"
               data-calculation-target="tip"
-              data-action="input->calculation#updateCalculations"
+              data-action="input->calculation#handleFieldInput"
             />
           </div>
         </div>
       </div>
-
+      <div id="error" class="text-danger"></div>
       <div class="row" id="left-col-rows">
         <label for="number-of-people" class="form-label">Number of People</label>
         <div class="input-group">
@@ -62,7 +62,7 @@
             class="form-control text-end"
             id="numberOfPeopleInputValue"
             data-calculation-target="people"
-            data-action="input->calculation#updateCalculations"
+            data-action="input->calculation#handleFieldInput"
           />
         </div>
       </div>
@@ -81,7 +81,7 @@
           </span>
         </div>
       </div>
-
+              
       <div class="row mb-5">
         <div class="col">
           <label for="total" class="form-label">Total</label>
