@@ -72,7 +72,7 @@ label {
   background-color: var(--CustomButton);
   color: var(--DarkGrayishCyan-color);
 }
-.btn:hover {
+.btn:hover, .btn-selected {
   background-color: var(--ButtonCyan-color);
   color: var(--VeryDarkCyan-color);
 }
