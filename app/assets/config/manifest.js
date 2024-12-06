@@ -4,4 +4,3 @@
 //= link controllers/calculation_controller.js
 //= link controllers/hello_controller.js
 //= link controllers/index.js
-//= link controllers/datatable_controller.js
