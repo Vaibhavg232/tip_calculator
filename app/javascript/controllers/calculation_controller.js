@@ -19,9 +19,7 @@ export default class extends Controller {
     this.selectTip(field)
     let tipTargetElement = document.getElementsByClassName('btn-selected')[0];
     let tipTarget = tipTargetElement ? parseFloat(tipTargetElement.value) : 0;
-    // let tipTarget = document.getElementsByClassName('btn-selected')[0].value || 0;
 
-    // debugger
     let billAmount = parseFloat(this.billTarget?.value) || 0;
     let numberOfPeople = parseInt(this.peopleTarget?.value) || 0;
 
@@ -96,3 +94,12 @@ export default class extends Controller {
     this.totalAmountTarget.innerHTML = '$0.00';
   }
 }
+
+// datatable code for the admin
+document.addEventListener("DOMContentLoaded", function() {
+  $('#calculations-datatable').DataTable({
+    paging: true,
+    searching: true,
+    ordering: true
+  });
+});

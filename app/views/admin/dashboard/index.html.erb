@@ -1,0 +1,35 @@
+<div class="container mt-4">
+  <div class="card">
+    <div class="card-header">
+      <h3 class="card-title">Tip Calculations</h3>
+    </div>
+    <div class="card-body">
+      <table id="calculations-datatable" class="table table-striped table-bordered" data-controller="datatable" data-datatable-source="<%= admin_dashboard_path(format: :json) %>">
+        <thead class="thead-dark">
+          <tr>
+            <th>Bill Amount</th>
+            <th>Tip Percentage</th>
+            <th>Tip Amount</th>
+            <th>Total Bill</th>
+            <th>Number of People</th>
+            <th>Per-Person Amount</th>
+            <th>Created At</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @calculations.each do |calculation| %>
+            <tr>
+              <td><%= number_to_currency(calculation.bill_amount) %></td>
+              <td><%= number_to_percentage(calculation.tip_percentage, precision: 0) %></td>
+              <td><%= number_to_currency(calculation.tip_amount) %></td>
+              <td><%= number_to_currency(calculation.total_amount) %></td>
+              <td><%= calculation.number_of_people %></td>
+              <td><%= number_to_currency(calculation.per_person_amount) %></td>
+              <td><%= l(calculation.created_at, format: :long) %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
