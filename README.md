@@ -28,12 +28,10 @@ Users should be able to:
 
 ### Screenshot
 
-![tip_calculator_task_web_view.png](./tip_calculator_task_web_view.png)
-![tip_calculator_task_web_admin_view.png](./tip_calculator_task_web_admin_view.png)
+![tip_calculator_task2](https://github.com/user-attachments/assets/b1e688cd-c271-41da-9b84-d66fa0210cd4)
+![tip_calculator_task1](https://github.com/user-attachments/assets/67257196-ca36-4012-ae3c-46ef6bbd0f6f)
 
 <div>
-
-  <img src="tip_calculator_task_responsive_view.png" align="center"  height="500px"/>
 
 </div>
 
