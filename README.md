@@ -28,8 +28,8 @@ Users should be able to:
 
 ### Screenshot
 
-![tip_calculator_task_web_view.png](./tip_calculator_task1.png)
-![tip_calculator_task_web_admin_view.png](./tip_calculator_task2.png)
+![tip_calculator_task_web_view.png](./tip_calculator_task_web_view.png)
+![tip_calculator_task_web_admin_view.png](./tip_calculator_task_web_admin_view.png)
 
 <div>
 
