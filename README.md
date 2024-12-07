@@ -1,4 +1,4 @@
-# Tip calculator app solution
+# Frontend Mentor - Tip calculator app solution
 
 This is a solution to the [Tip calculator app challenge on Frontend Mentor](https://www.frontendmentor.io/challenges/tip-calculator-app-ugJNGbJUX). Frontend Mentor challenges help you improve your coding skills by building realistic projects.
 
@@ -13,7 +13,7 @@ This is a solution to the [Tip calculator app challenge on Frontend Mentor](http
   - [What I learned](#what-i-learned)
   - [Useful resources](#useful-resources)
 - [Author](#author)
-- [Acknowledgments](#acknowledgments)
+
 
 
 ## Overview
@@ -26,21 +26,22 @@ Users should be able to:
 - See hover states for all interactive elements on the page
 - Calculate the correct tip and total cost of the bill per person
 
-### Screenshot
-
-![tip_calculator_task2](https://github.com/user-attachments/assets/b1e688cd-c271-41da-9b84-d66fa0210cd4)
-![tip_calculator_task1](https://github.com/user-attachments/assets/67257196-ca36-4012-ae3c-46ef6bbd0f6f)
-
-<div>
-
-</div>
-
 ### Links
 
 - Solution URL: https://github.com/Vaibhavg232/tip_calculator.git
-- Live Site URL: https://tip-calculator-task-ce57c314a8ed.herokuapp.com
-- Live Admin Site URL: https://tip-calculator-task-ce57c314a8ed.herokuapp.com/admin/dashboard
+- Live Site URL: https://vaibhav-tip-calculator-50b495b0132b.herokuapp.com/
+- Live Admin Site URL: https://vaibhav-tip-calculator-50b495b0132b.herokuapp.com/admin/dashboard
 
+### Setup
+It requires ruby 3.2.0 version. Here are the commands to setup the appplication:
+```
+bundle install
+rails db:create db:migrate
+```
+Here is the command to start the server:
+```
+rails s
+```
 ## My process
 
 This was a really interesting Challenge especially because of the JS part. Just like other challenges, i chose mobile first approach 📱. 
