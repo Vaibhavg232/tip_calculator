@@ -76,7 +76,3 @@ I also tried to make the page more accessible (🤞)
 ## Author
 
 - Frontend Mentor - [@Vaibhavg232](https://www.frontendmentor.io/profile/Vaibhavg232)
-
-## Acknowledgments
-
-I referred to [ellienndea's](https://github.com/ellienndea/tip-calculator-app) solution to understand her approach on making buttons clickable (like checkboxes) and how the calculator needs to function. Her approach is really good one, and she also essentially used form inputs, which inspired me to do the same (as I thought it would be more accessible too 😊)
